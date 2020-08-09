@@ -43,8 +43,11 @@ namespace MyCompanyName.MyProjectName
 
         internal static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseAutofac()
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.AddLogging(c => c.AddSerilog());
+                    services.AddApplication<MyProjectNameModule>();
                     services.AddHostedService<MyProjectNameHostedService>();
                 });
     }
